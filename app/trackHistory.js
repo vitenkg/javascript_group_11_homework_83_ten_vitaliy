@@ -22,13 +22,12 @@ router.post('/', async (req,res) => {
         return res.status(401).send({error: "Wrong token"});
     }
 
-    // const track = await Track.findOne({_id: req.body.trackId});
     const date = new Date();
 
     const historyData = {
         datetime: date,
         track: req.body.trackId,
-        user,
+        user: user._id,
     }
 
     const history = new History(historyData);
