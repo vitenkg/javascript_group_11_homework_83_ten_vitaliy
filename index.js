@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const exitHook = require('async-exit-hook');
 const Users = require('./app/users');
+const TrackHistory = require('./app/trackHistory');
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,8 @@ app.use(express.static('public'));
 const port = 8000;
 
 app.use('/users', Users);
+app.use('/track_history', TrackHistory);
+
 
 const run = async () => {
   await mongoose.connect('mongodb://localhost/HW83');

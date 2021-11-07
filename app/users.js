@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require('../models/User');
 const bcrypt = require("bcrypt");
+const Track = require('../models/Track');
 
 const router = express.Router();
 
@@ -52,25 +53,6 @@ router.post('/sessions', async (req, res) => {
     user.generateToken();
     await user.save();
     res.send({message: "Username and password correct", user});
-});
-
-router.post('/track_history', async (req,res) => {
-   const token = req.get('Authorization');
-
-   if (!token) {
-       return res.status(401).send({error: "No token present"});
-   }
-
-   const user = await User.findOne({token});
-
-   if (!user) {
-       return res.status(401).send({error: "Wrong token"});
-   }
-
-   res.send({
-       message: "Secret Message",
-       username: user.username
-   });
 });
 
 module.exports = router;
