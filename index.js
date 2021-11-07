@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const exitHook = require('async-exit-hook');
+const artists = require('./app/artists');
+const tracks = require('./app/tracks');
+const albums = require('./app/albums');
 const Users = require('./app/users');
 const TrackHistory = require('./app/trackHistory');
 
@@ -12,6 +15,9 @@ app.use(express.static('public'));
 
 const port = 8000;
 
+app.use('/artists', artists);
+app.use('/albums', albums);
+app.use('/tracks', tracks);
 app.use('/users', Users);
 app.use('/track_history', TrackHistory);
 
